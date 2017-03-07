@@ -4,7 +4,7 @@ import static java.lang.System.arraycopy;
 public class Discnt {
 
     public static void main(String[] args) throws Exception {
-        File data = new File(Discnt.class.getResource("discnt.in").toURI());
+        File data = new File("discnt.in");
         String[] pricesStr;
         double discountInPercents = 0;
         try (BufferedReader br = new BufferedReader(new FileReader(data))) {
