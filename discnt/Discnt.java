@@ -1,4 +1,5 @@
 import java.io.*;
+import java.util.Locale;
 import static java.lang.System.arraycopy;
 
 public class Discnt {
@@ -24,7 +25,7 @@ public class Discnt {
 
     private static void saveTotalPrice(double totalPrice) throws Exception {
         PrintWriter writer = new PrintWriter("discnt.out", "UTF-8");
-        writer.println(totalPrice);
+        writer.println(String.format(Locale.ENGLISH,"%.2f",totalPrice));
         writer.close();
     }
 
