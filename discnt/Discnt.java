@@ -1,5 +1,7 @@
 import java.io.*;
 import java.util.Locale;
+import java.util.Arrays;
+
 import static java.lang.System.arraycopy;
 
 public class Discnt {
@@ -16,7 +18,8 @@ public class Discnt {
         double discount = discountInPercents / 100;
         double[] prices = covertToDouble(pricesStr);
 
-        sort(prices);
+        //sort(prices);
+	Arrays.sort(prices);	
 
         double totalPrice = calculateTotalPrice(prices, discount);
 
