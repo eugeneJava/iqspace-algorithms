@@ -8,11 +8,11 @@ public class Lngpok {
 
         int initialJokers = countJockers(cards);
 
-        int longestSeq = 1;
-        int currentSeq = 1;
+        int longestSeq = 0;
+        int currentSeq = 0;
         int availableJockers = initialJokers;
 
-        for (int i = initialJokers; i < cards.length -1; i++) {
+        for (int i = 0; i < cards.length -1; i++) {
             int gap = cards[i + 1] - cards[i];
 
             if (gap > 0) {
