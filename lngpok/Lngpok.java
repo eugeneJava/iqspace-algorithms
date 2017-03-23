@@ -8,38 +8,38 @@ public class Lngpok {
 
         int initialJokers = countJockers(cards);
 
-        int longestSeq = 0;
-        int currentSeq = 0;
+        int currentSeq = 1;
         int availableJockers = initialJokers;
+        int longestSeq = availableJockers;
 
-        for (int i = 0; i < cards.length -1; i++) {
+        for (int i = 0; i < cards.length - 1; i++) {
             if (cards[i] == 0) {
                 continue;
             }
 
-            int gap = cards[i + 1] - cards[i];
+                int gap = cards[i + 1] - cards[i];
 
-            if (gap > 0) {
-                if (gap == 1) {
-                    currentSeq++;
-                    longestSeq = chooseLongest(currentSeq, longestSeq);
-                } else if(gap > 1) {
-                    int requidesJokers = gap - 1;
-                    if (availableJockers >= requidesJokers) {
-                        currentSeq = currentSeq + 1; // first number in the gap
-                        currentSeq = currentSeq + requidesJokers;
-                        currentSeq = currentSeq + 1; // last number in the gap
-                        availableJockers -= requidesJokers;
-                        longestSeq = chooseLongest(currentSeq, longestSeq);
-                    } else {
-                        currentSeq = 1;
-                        availableJockers = initialJokers;
+                if (gap > 0) {
+                    if (gap == 1) {
+                        currentSeq++;
+                        longestSeq = chooseLongest(currentSeq + availableJockers, longestSeq);
+                    } else if (gap > 1) {
+                        int requidesJokers = gap - 1;
+                        if (availableJockers >= requidesJokers) {
+                            currentSeq = currentSeq + 1; // first number in the gap
+                            currentSeq = currentSeq + requidesJokers;
+                            availableJockers -= requidesJokers;
+                            longestSeq = chooseLongest(currentSeq + availableJockers, longestSeq);
+                        } else {
+                            currentSeq = 1;
+                            availableJockers = initialJokers;
+                        }
                     }
-                }
             }
         }
 
         saveResult(longestSeq + availableJockers);
+        //System.out.println(longestSeq);
     }
 
     private static int chooseLongest(int currentSeq, int longestSeq) {
