@@ -1,21 +1,27 @@
 import java.io.*;
 
 public class Lngpok {
-
+    
     public static void main(String[] args) throws Exception {
-        int[] cards = readCards();
-        sort(cards, 1000000);
 
-        int initialJokers = countJockers(cards);
 
-        int currentSeq = 1;
-        int availableJockers = initialJokers;
-        int longestSeq = availableJockers;
 
-        for (int i = 0; i < cards.length - 1; i++) {
-            if (cards[i] == 0) {
-                continue;
+            int[] cards = readCards();
+            sort(cards, 100);
+
+            int initialJokers = countJockers(cards);
+
+            int availableJockers = initialJokers;
+            int currentSeq = 1;
+            int longestSeq = availableJockers;
+
+            if (cards.length > availableJockers) {
+                longestSeq = availableJockers + 1;
             }
+            for (int i = 0; i < cards.length - 1; i++) {
+                if (cards[i] == 0) {
+                    continue;
+                }
 
                 int gap = cards[i + 1] - cards[i];
 
@@ -35,11 +41,13 @@ public class Lngpok {
                             availableJockers = initialJokers;
                         }
                     }
+                }
             }
-        }
 
-        saveResult(longestSeq + availableJockers);
-        //System.out.println(longestSeq);
+
+            saveResult(longestSeq);
+
+
     }
 
     private static int chooseLongest(int currentSeq, int longestSeq) {
