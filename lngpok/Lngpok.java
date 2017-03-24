@@ -1,28 +1,25 @@
+
 import java.io.*;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class Lngpok {
-    
+
+
     public static void main(String[] args) throws Exception {
-
-
-
             int[] cards = readCards();
-            sort(cards, 100);
+            sort(cards, 1000000);
 
             int initialJokers = countJockers(cards);
-
             int availableJockers = initialJokers;
             int currentSeq = 1;
             int longestSeq = availableJockers;
 
             if (cards.length > availableJockers) {
-                longestSeq = availableJockers + 1;
+                longestSeq = longestSeq + 1;
             }
-            for (int i = 0; i < cards.length - 1; i++) {
-                if (cards[i] == 0) {
-                    continue;
-                }
-
+            for (int i = availableJockers; i < cards.length - 1; i++) {
                 int gap = cards[i + 1] - cards[i];
 
                 if (gap > 0) {
@@ -39,15 +36,18 @@ public class Lngpok {
                         } else {
                             currentSeq = 1;
                             availableJockers = initialJokers;
+
+                            if (availableJockers >= requidesJokers) {
+                                currentSeq = currentSeq + 1; // first number in the gap
+                                currentSeq = currentSeq + requidesJokers;
+                                availableJockers -= requidesJokers;
+                                longestSeq = chooseLongest(currentSeq + availableJockers, longestSeq);
+                            }
                         }
                     }
                 }
             }
-
-
             saveResult(longestSeq);
-
-
     }
 
     private static int chooseLongest(int currentSeq, int longestSeq) {
