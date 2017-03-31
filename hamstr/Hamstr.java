@@ -1,5 +1,7 @@
 import java.io.*;
 
+import static java.lang.System.arraycopy;
+
 public class Hamstr {
     public static void main(String[] args) throws Exception {
         int dailyFood = 0;
@@ -41,11 +43,11 @@ public class Hamstr {
                 totalDaylyConsuming[i] = con[0] + con[1];
             }
 
-            sort(totalDaylyConsuming, 10000000);
+            sortAsc(totalDaylyConsuming);
 
             int counter = 0;
             for (int hamsterDaylyConsuming : totalDaylyConsuming) {
-                if (hamsterDaylyConsuming <= dailyFood) {
+                if (hamsterDaylyConsuming <= dailyFood && hamstersCount < numberOfHamstersInShop) {
                     hamstersCount ++;
                     dailyFood = dailyFood - hamsterDaylyConsuming;
                     counter++;
@@ -78,20 +80,35 @@ public class Hamstr {
         writer.close();
     }
 
-    private static void sort(int[] a, int range) {
-        int[] hist = new int[range + 1]; //assume from=0
+    public static void sortAsc(int[] a) {
+        for (int i = 1; i < a.length; i++) {
+            int j = i - 1;
 
-        for (int i = 0; i < a.length; i++) {
-            hist[a[i]]++;
-        }
-
-        int j = 0;
-        for (int i = 0; i < hist.length; i++) {
-            int cnt = hist[i];
-
-            for (int k = 0; k < cnt; k++) {
-                a[j++] = i;
+            if (a[i] < a[j]) {
+                int k = searchIndexBinaryAsc(a, j, i);
+                int e = a[i];
+                int length = i - k;
+                arraycopy(a, k, a, k+1, length);
+                a[k] = e;
             }
         }
     }
+
+    private static int searchIndexBinaryAsc(int[] a, int sorted, int i) {
+        int start = 0;
+        int end = sorted;
+        while (end >= start) {
+            int mid = start + ((end - start) / 2);
+
+            if (a[mid] < a[i]) {
+                start = mid + 1;
+            } else if(a[mid] > a[i]) {
+                end = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        return start;
+    }
 }
+
