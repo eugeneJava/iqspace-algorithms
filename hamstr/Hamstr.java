@@ -15,22 +15,19 @@ public class Hamstr {
             numberOfHamstersInShop = Integer.valueOf(br.readLine());
             dailyConsumings = new int[numberOfHamstersInShop][2];
 
-
-            System.out.println("Daily consuming by hamster");
-
+            
             int cnt = 0;
             for (String line; (line = br.readLine()) != null; ) {
                 String[] split = line.split(" ");
                 dailyConsumings[cnt][0] = Integer.valueOf(split[0]);
                 dailyConsumings[cnt][1] = Integer.valueOf(split[1]);
-                System.out.println(dailyConsumings[cnt][0] + " " + dailyConsumings[cnt][1]);
                 cnt++;
             }
         }
 
         System.out.println("Daily allowed food " + dailyFood);
         System.out.println("number of hamsters " + numberOfHamstersInShop);
-        System.out.println("daily consumings " + dailyConsumings.length);
+        System.out.println("daily consumings length" + dailyConsumings.length);
 
         int hamstersCount = 0;
         if (numberOfHamstersInShop == 1) {
@@ -50,9 +47,7 @@ public class Hamstr {
             }
 
             sortAsc(totalDaylyConsuming);
-            //RREMOVEE!!!!!!
-            assertSortedAsc(totalDaylyConsuming);
-
+          
             int counter = 0;
             for (int hamsterDaylyConsuming : totalDaylyConsuming) {
                 if (hamsterDaylyConsuming <= dailyFood) {
@@ -75,7 +70,7 @@ public class Hamstr {
             }
         }
 
-        System.out.println("result " + hamstersCount);
+        System.out.println("Result " + hamstersCount);
 
         saveResult(hamstersCount);
     }
