@@ -47,7 +47,7 @@ public class Hamstr {
 
             int counter = 0;
             for (int hamsterDaylyConsuming : totalDaylyConsuming) {
-                if (hamsterDaylyConsuming <= dailyFood && hamstersCount < numberOfHamstersInShop) {
+                if (hamsterDaylyConsuming <= dailyFood) {
                     hamstersCount ++;
                     dailyFood = dailyFood - hamsterDaylyConsuming;
                     counter++;
