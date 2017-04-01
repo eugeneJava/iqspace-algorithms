@@ -25,7 +25,10 @@ public class Hamstr {
             }
         }
 
-
+        System.out.println("Daily allowed food " + dailyFood);
+        System.out.println("number of hamsters " + numberOfHamstersInShop);
+        System.out.println("daily consumings " + dailyConsumings.length);
+        
         int hamstersCount = 0;
         if (numberOfHamstersInShop == 1) {
             for (int con[] : dailyConsumings) {
@@ -44,6 +47,7 @@ public class Hamstr {
             }
 
             sortAsc(totalDaylyConsuming);
+            assertSortedAsc(totalDaylyConsuming);
 
             int counter = 0;
             for (int hamsterDaylyConsuming : totalDaylyConsuming) {
@@ -66,7 +70,7 @@ public class Hamstr {
                 }
             }
         }
-
+        System.out.println("result " + hamstersCount);
         saveResult(hamstersCount);
     }
 
@@ -110,5 +114,16 @@ public class Hamstr {
         }
         return start;
     }
+
+    public static void assertSortedAsc(int[] a) {
+        if (a.length == 1) return;
+
+        for (int i = 0; i < a.length - 1; i++) {
+            if (a[i + 1] < a[i]) {
+                throw new IllegalStateException("array is not sorted. a[" + i +"] should be not larger then a[" + (i + 1) +"]" );
+            }
+        }
+    }
+
 }
 
